@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 export class TopicComponent {
 
     topics: Topic[];
+    responseStatus : String;
     customObject : CustomObject;
     constructor(private topicService: TopicService) { }
 
@@ -25,11 +26,16 @@ export class TopicComponent {
 
     deleteTopic(topicId) : void {
         this.topicService.deleteTopic(topicId).subscribe(
-            topics => {
+            customObject => {
+                this.responseStatus = customObject.responseStatus;
+                if(this.responseStatus.indexOf("SUCCESS") != -1) {
+                    console.log("Deleted Successfully");
+                } else {
+                    console.log("Error occoured while deleting Topics");
+                }
                 this.getTopics();
                 return true;
             }
-
         );
     }
 

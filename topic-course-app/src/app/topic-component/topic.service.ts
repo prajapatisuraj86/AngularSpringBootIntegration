@@ -10,11 +10,16 @@ import { CustomObject } from "../customobject";
 @Injectable()
 export class TopicService {
     getTopicUrl = "http://localhost:8184/topics";
+    deleteTopicUrl = "http://localhost:8184/topics/";
 
     constructor(private http: Http){}
 
-    getTopics (): Observable<CustomObject> {
+    getTopics(): Observable<CustomObject> {
         return this.http.get(this.getTopicUrl).map(this.parseData).catch(this.handleError);
+    }
+
+    deleteTopic(topicId) : Observable<CustomObject> {
+        return this.http.delete(this.deleteTopicUrl + topicId).map(this.parseData).catch(this.handleError);;
     }
 
     // This method parses the data to JSON
@@ -28,8 +33,4 @@ export class TopicService {
         // This returns another Observable for the observer to subscribe to
         return Observable.throw(errorMessage);
     }
-
-    deleteTopic(topicId) {
-        return this.http.delete('http://localhost:8184/topics/' + topicId);
-      }
 }
