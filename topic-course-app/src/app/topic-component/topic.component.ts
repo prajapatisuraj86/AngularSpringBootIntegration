@@ -1,3 +1,4 @@
+import { CustomObject } from './../customobject';
 import { TopicService } from './topic.service';
 import { Component } from "@angular/core";
 import { Topic } from './topic';
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 export class TopicComponent {
 
     topics: Topic[];
+    customObject : CustomObject;
     constructor(private topicService: TopicService) { }
 
     ngOnInit() {
@@ -18,7 +20,7 @@ export class TopicComponent {
     }
 
     getTopics(): void {
-        this.topicService.getTopics().subscribe(topics => this.topics = topics);
+        this.topicService.getTopics().subscribe(customObject => this.topics = customObject.resObject);
     }
 
     deleteTopic(topicId) : void {

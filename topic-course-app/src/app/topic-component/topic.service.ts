@@ -4,6 +4,7 @@ import { Topic } from "./topic";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { CustomObject } from "../customobject";
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class TopicService {
 
     constructor(private http: Http){}
 
-    getTopics (): Observable<Topic[]> {
+    getTopics (): Observable<CustomObject> {
         return this.http.get(this.getTopicUrl).map(this.parseData).catch(this.handleError);
     }
 
