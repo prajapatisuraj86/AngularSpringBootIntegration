@@ -18,8 +18,10 @@ export class TopicComponent {
     deleteSuccess : boolean;
     isView : boolean = true;
     isUpdate : boolean = false;
+    isAdd : boolean = false;
     topicId : String;
     updateTopicObj : Topic;
+    public addTopicObj : Topic = new Topic();
     public messageAlert : MessageDemoComponent = new MessageDemoComponent();
 
 
@@ -54,6 +56,7 @@ export class TopicComponent {
     enableUpdateTopic(topic) : void {
         this.isView = false;
         this.isUpdate = true;
+        this.isAdd = false;
         this.updateTopicObj = topic;
         this.topicId = this.updateTopicObj.id;
     }
@@ -80,8 +83,8 @@ export class TopicComponent {
         this.isUpdate = false;
     }
 
-    addTopic(topic) : void {
-        this.topicService.addTopic(topic).subscribe(
+    addTopic() : void {
+        this.topicService.addTopic(this.addTopicObj).subscribe(
             customObject => {
                 this.responseStatus = customObject.responseStatus;
                 if(this.isEqual(this.responseStatus,"SUCCESS")) {
@@ -89,17 +92,20 @@ export class TopicComponent {
                 } else {
                     console.log("Error occoured while updating Topics");
                 }
+                this.isAdd = false;
+                this.getTopics();
                 return true;
             }
         );
     }
 
     cancelAdd() : void {
-
+        this.isAdd = false;
     }
 
     enableAddTopic() : void {
-
+        this.addTopicObj = new Topic();
+        this.isAdd = true;
     }
 
     isEqual(var1 : String, var2 : String) : boolean {

@@ -1,5 +1,6 @@
-export interface Topic {
+export class Topic {
     id : String;
     name : String;
     description : String;
+
 }

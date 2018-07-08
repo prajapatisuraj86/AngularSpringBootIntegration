@@ -4,14 +4,38 @@
     </div>
 
     <div class="col-lg-1">
-            <button type="button" class="btn btn-success" (click)="enableAddTopic()">Add</button>
-        </div>
+        <button [disabled]="isAdd" type="button" class="btn btn-success" (click)="enableAddTopic()">Add</button>
+    </div>
 
     <div class="col-lg-2">
         <h4>Add Topic </h4>
     </div>
 </div>
 
+<div *ngIf="isAdd">
+    <hr>
+    <div class="row">
+        <div class="col-lg-3">
+            <input type="text" [(ngModel)]="addTopicObj.id" placeholder="Enter Topic Id">
+        </div>
+
+        <div class="col-lg-3">
+            <input type="text" [(ngModel)]="addTopicObj.name" placeholder="Enter Topic Name">
+        </div>
+
+        <div class="col-lg-3">
+            <input type="text" [(ngModel)]="addTopicObj.description" placeholder="Enter Topic Description">
+        </div>
+
+        <div class="col-lg-1">
+            <button type="button" class="btn btn-success" (click)="addTopic()">Add</button>
+        </div>
+
+        <div class="col-lg-2">
+            <button type="button" class="btn btn-primary" (click)="cancelAdd()">Cancel</button>
+        </div>
+    </div>
+</div>
 <br>
 
 <table class="table table-hover">
@@ -44,8 +68,8 @@
             </td>
             <td>
                 <div *ngIf="isView">
-                    <button type="button" class="btn btn-light" (click)="enableUpdateTopic(topic)">Edit</button>
-                    <button type="button" class="btn btn-light" (click)="deleteTopic(topic.id)">Delete</button>
+                    <button [disabled]="isAdd" type="button" class="btn btn-light" (click)="enableUpdateTopic(topic)">Edit</button>
+                    <button [disabled]="isAdd" type="button" class="btn btn-light" (click)="deleteTopic(topic.id)">Delete</button>
                 </div>
 
                 <div *ngIf="isUpdate && !isEqual(topicId,topic.id)">
@@ -54,8 +78,8 @@
                 </div>
 
                 <div *ngIf="isUpdate && isEqual(topicId,topic.id)">
-                    <button type="button" class="btn btn-success" (click)="updateTopic(topic)">Update</button>
-                    <button type="button" class="btn btn-primary" (click)="cancelUpdate()">Cancel</button>
+                    <button [disabled]="isAdd" type="button" class="btn btn-success" (click)="updateTopic(topic)">Update</button>
+                    <button [disabled]="isAdd" type="button" class="btn btn-primary" (click)="cancelUpdate()">Cancel</button>
                 </div>
 
             </td>
