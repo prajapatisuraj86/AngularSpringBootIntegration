@@ -16,15 +16,15 @@
     <hr>
     <div class="row">
         <div class="col-lg-3">
-            <input type="text" [(ngModel)]="addTopicObj.id" placeholder="Enter Topic Id">
+            <input type="text" required [(ngModel)]="addTopicObj.id" placeholder="Enter Topic Id">
         </div>
 
         <div class="col-lg-3">
-            <input type="text" [(ngModel)]="addTopicObj.name" placeholder="Enter Topic Name">
+            <input type="text" required [(ngModel)]="addTopicObj.name" placeholder="Enter Topic Name">
         </div>
 
         <div class="col-lg-3">
-            <input type="text" [(ngModel)]="addTopicObj.description" placeholder="Enter Topic Description">
+            <input type="text" required [(ngModel)]="addTopicObj.description" placeholder="Enter Topic Description">
         </div>
 
         <div class="col-lg-1">
@@ -37,6 +37,12 @@
     </div>
 </div>
 <br>
+
+<div *ngIf="isAdd && isAddValidation">
+    <div class="row">
+        <p class="alert alert-danger">{{errorMessage}}</p>
+    </div>
+</div>
 
 <table class="table table-hover">
     <thead>
