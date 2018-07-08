@@ -37,7 +37,7 @@ export class TopicComponent {
         this.topicService.deleteTopic(topicId).subscribe(
             customObject => {
                 this.responseStatus = customObject.responseStatus;
-                if(this.responseStatus.indexOf("SUCCESS") != -1) {
+                if(this.isEqual(this.responseStatus,"SUCCESS")) {
                     this.deleteSuccess = true;
                     console.log("Deleted Successfully");
                     this.messageAlert.success("Deleted Sucessfully.");
@@ -62,7 +62,7 @@ export class TopicComponent {
         this.topicService.updateTopic(topic, topic.id).subscribe(
             customObject => {
                 this.responseStatus = customObject.responseStatus;
-                if(this.responseStatus.indexOf("SUCCESS") != -1) {
+                if(this.isEqual(this.responseStatus,"SUCCESS")) {
                     console.log("Updated Successfully");
                 } else {
                     console.log("Error occoured while updating Topics");
@@ -80,7 +80,7 @@ export class TopicComponent {
         this.isUpdate = false;
     }
 
-    isEqual(var1 : string, var2 : string) : boolean {
+    isEqual(var1 : String, var2 : String) : boolean {
         return var1 == var2;
     }
 

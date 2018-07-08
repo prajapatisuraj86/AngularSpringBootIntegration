@@ -27,13 +27,11 @@
             </td>
             <td>
                 <div *ngIf="isView">
-                    <button type="button" class="btn btn-light">Show Course</button>
                     <button type="button" class="btn btn-light" (click)="enableUpdateTopic(topic)">Edit</button>
                     <button type="button" class="btn btn-light" (click)="deleteTopic(topic.id)">Delete</button>
                 </div>
 
                 <div *ngIf="isUpdate && !isEqual(topicId,topic.id)">
-                    <button [disabled]="true" type="button" class="btn btn-light">Show Course</button>
                     <button [disabled]="true" type="button" class="btn btn-light">Update</button>
                     <button [disabled]="true" type="button" class="btn btn-light">Delete</button>
                 </div>
