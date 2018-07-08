@@ -63,7 +63,7 @@ export class TopicComponent {
             customObject => {
                 this.responseStatus = customObject.responseStatus;
                 if(this.isEqual(this.responseStatus,"SUCCESS")) {
-                    console.log("Updated Successfully");
+                    console.log("Topic Updated Successfully");
                 } else {
                     console.log("Error occoured while updating Topics");
                 }
@@ -78,6 +78,28 @@ export class TopicComponent {
     cancelUpdate() {
         this.isView = true;
         this.isUpdate = false;
+    }
+
+    addTopic(topic) : void {
+        this.topicService.addTopic(topic).subscribe(
+            customObject => {
+                this.responseStatus = customObject.responseStatus;
+                if(this.isEqual(this.responseStatus,"SUCCESS")) {
+                    console.log("Topic added Successfully");
+                } else {
+                    console.log("Error occoured while updating Topics");
+                }
+                return true;
+            }
+        );
+    }
+
+    cancelAdd() : void {
+
+    }
+
+    enableAddTopic() : void {
+
     }
 
     isEqual(var1 : String, var2 : String) : boolean {
