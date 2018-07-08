@@ -13,17 +13,35 @@
             <td>{{row.lastName}}</td>
             <td>{{row.birthDate}}</td>-->
             <td>{{topic.id | uppercase}} </td>
-            <td>{{topic.name}}</td>
-            <td>{{topic.description}}</td>
             <td>
-                <!--<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
-                    <i class="glyphicon glyphicon-remove-circle">
-                    </i>
-                </button>-->
+                <div *ngIf="isView || (isUpdate && !isEqual(topicId,topic.id))">{{topic.name}}</div>
+                <div *ngIf="isUpdate && isEqual(topicId,topic.id)">
+                    <input type="text" [(ngModel)]="updateTopicObj.name" placeholder="{{topic.name}}">
+                </div>
+            </td>
+            <td>
+                <div *ngIf="isView || (isUpdate && !isEqual(topicId,topic.id))">{{topic.description}}</div>
+                <div *ngIf="isUpdate && isEqual(topicId,topic.id)">
+                    <input type="text" [(ngModel)]="updateTopicObj.description" placeholder="{{topic.description}}">
+                </div>
+            </td>
+            <td>
+                <div *ngIf="isView">
+                    <button type="button" class="btn btn-light">Show Course</button>
+                    <button type="button" class="btn btn-light" (click)="enableUpdateTopic(topic)">Edit</button>
+                    <button type="button" class="btn btn-light" (click)="deleteTopic(topic.id)">Delete</button>
+                </div>
 
-                <button type="button" class="btn btn-light">Show Course</button>
-                <button type="button" class="btn btn-light">Edit</button>
-                <button type="button" class="btn btn-light" (click)="deleteTopic(topic.id)">Delete</button>
+                <div *ngIf="isUpdate && !isEqual(topicId,topic.id)">
+                    <button [disabled]="true" type="button" class="btn btn-light">Show Course</button>
+                    <button [disabled]="true" type="button" class="btn btn-light">Update</button>
+                    <button [disabled]="true" type="button" class="btn btn-light">Delete</button>
+                </div>
+
+                <div *ngIf="isUpdate && isEqual(topicId,topic.id)">
+                        <button type="button" class="btn btn-success" (click)="updateTopic(topic)">Update</button>
+                        <button type="button" class="btn btn-primary" (click)="cancelUpdate()">Cancel</button>
+                    </div>
 
             </td>
         </tr>

@@ -11,6 +11,7 @@ import { CustomObject } from "../customobject";
 export class TopicService {
     getTopicUrl = "http://localhost:8184/topics";
     deleteTopicUrl = "http://localhost:8184/topics/";
+    updateTopicUrl = "http://localhost:8184/topics/";
 
     constructor(private http: Http){}
 
@@ -19,7 +20,11 @@ export class TopicService {
     }
 
     deleteTopic(topicId) : Observable<CustomObject> {
-        return this.http.delete(this.deleteTopicUrl + topicId).map(this.parseData).catch(this.handleError);;
+        return this.http.delete(this.deleteTopicUrl + topicId).map(this.parseData).catch(this.handleError);
+    }
+
+    updateTopic(topic, topicId) : Observable<CustomObject> {
+        return this.http.put(this.updateTopicUrl + topicId, topic).map(this.parseData).catch(this.handleError);
     }
 
     // This method parses the data to JSON
