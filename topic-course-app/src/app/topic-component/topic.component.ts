@@ -15,7 +15,6 @@ export class TopicComponent {
     topics: Topic[];
     responseStatus: String;
     customObject: CustomObject;
-    deleteSuccess: boolean;
     isView: boolean = true;
     isUpdate: boolean = false;
     isAdd: boolean = false;
@@ -24,7 +23,9 @@ export class TopicComponent {
     errorMessage : String = '';
     updateTopicObj: Topic;
     public addTopicObj: Topic = new Topic();
-    public messageAlert: MessageDemoComponent = new MessageDemoComponent();
+    isAddSucess : boolean = false;
+    isUpdateSucess : boolean = false;
+    isDeleteSuccess: boolean = false;
 
 
     constructor(private topicService: TopicService) { }
@@ -42,11 +43,10 @@ export class TopicComponent {
             customObject => {
                 this.responseStatus = customObject.responseStatus;
                 if (this.isEqual(this.responseStatus, "SUCCESS")) {
-                    this.deleteSuccess = true;
+                    this.isDeleteSuccess = true;
                     console.log("Deleted Successfully");
-                    this.messageAlert.success("Deleted Sucessfully.");
                 } else {
-                    this.deleteSuccess = false;
+                    this.isDeleteSuccess = false;
                     console.log("Error occoured while deleting Topics");
                 }
                 this.getTopics();
@@ -72,6 +72,7 @@ export class TopicComponent {
                 } else {
                     console.log("Error occoured while updating Topics");
                 }
+                this.isUpdateSucess = true;
                 this.isView = true;
                 this.isUpdate = false;
                 this.getTopics();
@@ -104,6 +105,7 @@ export class TopicComponent {
                     } else {
                         console.log("Error occoured while updating Topics");
                     }
+                    this.isAddSucess = true;
                     this.isAdd = false;
                     this.isAddValidation = false;
                     this.getTopics();
@@ -121,6 +123,10 @@ export class TopicComponent {
     enableAddTopic(): void {
         this.addTopicObj = new Topic();
         this.isAdd = true;
+    }
+
+    closeAddSuccess() : void {
+        this.isAddSucess = false;
     }
 
     isEqual(var1: String, var2: String): boolean {
