@@ -24,6 +24,7 @@ export class TopicComponent {
     updateTopicObj: Topic;
     public addTopicObj: Topic = new Topic();
     isAddSucess : boolean = false;
+    isAddError : boolean = false;
     isUpdateSucess : boolean = false;
     isDeleteSuccess: boolean = false;
 
@@ -101,11 +102,12 @@ export class TopicComponent {
                 customObject => {
                     this.responseStatus = customObject.responseStatus;
                     if (this.isEqual(this.responseStatus, "SUCCESS")) {
+                        this.isAddSucess = true;
                         console.log("Topic added Successfully");
                     } else {
+                        this.isAddError = true;
                         console.log("Error occoured while updating Topics");
                     }
-                    this.isAddSucess = true;
                     this.isAdd = false;
                     this.isAddValidation = false;
                     this.getTopics();
@@ -127,6 +129,10 @@ export class TopicComponent {
 
     closeAddSuccess() : void {
         this.isAddSucess = false;
+    }
+
+    closeAddError() : void {
+        this.isAddError = false;
     }
 
     isEqual(var1: String, var2: String): boolean {
