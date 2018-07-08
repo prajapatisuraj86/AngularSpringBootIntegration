@@ -4,7 +4,7 @@
     </div>
 
     <div class="col-lg-1">
-        <button [disabled]="isAdd" type="button" class="btn btn-success" (click)="enableAddTopic()">Add</button>
+        <button [disabled]="isAdd || isUpdate" type="button" class="btn btn-success" (click)="enableAddTopic()">Add</button>
     </div>
 
     <div class="col-lg-2">
