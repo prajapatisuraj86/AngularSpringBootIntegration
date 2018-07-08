@@ -19,14 +19,17 @@ export class TopicComponent {
     isUpdate: boolean = false;
     isAdd: boolean = false;
     topicId: String;
-    isAddValidation : boolean = false;
-    errorMessage : String = '';
+    errorMessage: String = '';
     updateTopicObj: Topic;
     public addTopicObj: Topic = new Topic();
-    isAddSucess : boolean = false;
-    isAddError : boolean = false;
-    isUpdateSucess : boolean = false;
+    isAddSucess: boolean = false;
+    isAddValidation: boolean = false;
+    isAddError: boolean = false;
+    isUpdateSucess: boolean = false;
+    isUpdateValidation: boolean = false;
+    isUpdateError: boolean = false;
     isDeleteSuccess: boolean = false;
+    isDeleteError: boolean = false;
 
 
     constructor(private topicService: TopicService) { }
@@ -65,25 +68,36 @@ export class TopicComponent {
     }
 
     updateTopic(topic): void {
-        this.topicService.updateTopic(topic, topic.id).subscribe(
-            customObject => {
-                this.responseStatus = customObject.responseStatus;
-                if (this.isEqual(this.responseStatus, "SUCCESS")) {
-                    console.log("Topic Updated Successfully");
-                } else {
-                    console.log("Error occoured while updating Topics");
+        if (this.updateTopicObj.name == null || this.updateTopicObj.name.trim().length <= 0) {
+            this.isUpdateValidation = true;
+            this.errorMessage = "Topic Name is Mandatory";
+        } else if (this.updateTopicObj.description == null || this.updateTopicObj.description.trim().length <= 0) {
+            this.isUpdateValidation = true;
+            this.errorMessage = "Topic Description is Mandatory";
+        } else {
+            this.topicService.updateTopic(topic, topic.id).subscribe(
+                customObject => {
+                    this.responseStatus = customObject.responseStatus;
+                    if (this.isEqual(this.responseStatus, "SUCCESS")) {
+                        this.isUpdateSucess = true;
+                        console.log("Topic Updated Successfully");
+                    } else {
+                        this.isUpdateError = true;
+                        console.log("Error occoured while updating Topics");
+                    }
+                    this.isUpdateValidation = false;
+                    this.isView = true;
+                    this.isUpdate = false;
+                    this.getTopics();
+                    return true;
                 }
-                this.isUpdateSucess = true;
-                this.isView = true;
-                this.isUpdate = false;
-                this.getTopics();
-                return true;
-            }
-        );
+            );
+        }
     }
 
     cancelUpdate() {
         this.isView = true;
+        this.isUpdateValidation = false;
         this.isUpdate = false;
     }
 
@@ -127,12 +141,28 @@ export class TopicComponent {
         this.isAdd = true;
     }
 
-    closeAddSuccess() : void {
+    closeAddSuccess(): void {
         this.isAddSucess = false;
     }
 
-    closeAddError() : void {
+    closeAddError(): void {
         this.isAddError = false;
+    }
+
+    closeUpdateSuccess(): void {
+        this.isUpdateSucess = false;
+    }
+
+    closeUpdateError(): void {
+        this.isUpdateError = false;
+    }
+
+    closeDeleteSuccess(): void {
+        this.isDeleteSuccess = false;
+    }
+
+    closeDeleteError(): void {
+        this.isDeleteError = false;
     }
 
     isEqual(var1: String, var2: String): boolean {

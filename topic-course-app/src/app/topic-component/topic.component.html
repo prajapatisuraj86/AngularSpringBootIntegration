@@ -54,10 +54,52 @@
 </div>
 
 <div *ngIf="isAddError">
+    <div class="row">
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close" (click)="closeAddError()">&times;</button>
+            <strong>Error occored while adding Topic!</strong>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isUpdateValidation">
+        <div class="row">
+            <p class="alert alert-danger">{{errorMessage}}</p>
+        </div>
+    </div>
+
+<div *ngIf="isUpdateSucess">
+    <div class="row">
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close" (click)="closeUpdateSuccess()">&times;</button>
+            <strong>Topic is updated successfully!</strong>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isUpdateError">
+    <div class="row">
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close" (click)="closeUpateError()">&times;</button>
+            <strong>Error occored while updating Topic!</strong>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isDeleteSuccess">
+        <div class="row">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close" (click)="closeDeleteSuccess()">&times;</button>
+                <strong>Topic is deleted successfully!</strong>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="isDeleteError">
         <div class="row">
             <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-label="close" (click)="closeAddError()">&times;</button>
-                <strong>Error occored while adding Topic!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="close" (click)="closeDeleteError()">&times;</button>
+                <strong>Error occored while deleting Topic!</strong>
             </div>
         </div>
     </div>
