@@ -16,15 +16,15 @@
     <hr>
     <div class="row">
         <div class="col-lg-3">
-            <input type="text" required [(ngModel)]="addTopicObj.id" placeholder="Enter Topic Id">
+            <input class="form-control" type="text" required [(ngModel)]="addTopicObj.id" placeholder="Enter Topic Id">
         </div>
 
         <div class="col-lg-3">
-            <input type="text" required [(ngModel)]="addTopicObj.name" placeholder="Enter Topic Name">
+            <input class="form-control" type="text" required [(ngModel)]="addTopicObj.name" placeholder="Enter Topic Name">
         </div>
 
         <div class="col-lg-3">
-            <input type="text" required [(ngModel)]="addTopicObj.description" placeholder="Enter Topic Description">
+            <input class="form-control" type="text" required [(ngModel)]="addTopicObj.description" placeholder="Enter Topic Description">
         </div>
 
         <div class="col-lg-1">
@@ -123,13 +123,13 @@
             <td>
                 <div *ngIf="isView || (isUpdate && !isEqual(topicId,topic.id))">{{topic.name}}</div>
                 <div *ngIf="isUpdate && isEqual(topicId,topic.id)">
-                    <input type="text" [(ngModel)]="updateTopicObj.name" placeholder="{{topic.name}}">
+                    <input class="form-control" type="text" [(ngModel)]="updateTopicObj.name" placeholder="{{topic.name}}">
                 </div>
             </td>
             <td>
                 <div *ngIf="isView || (isUpdate && !isEqual(topicId,topic.id))">{{topic.description}}</div>
                 <div *ngIf="isUpdate && isEqual(topicId,topic.id)">
-                    <input type="text" [(ngModel)]="updateTopicObj.description" placeholder="{{topic.description}}">
+                    <input class="form-control" type="text" [(ngModel)]="updateTopicObj.description" placeholder="{{topic.description}}">
                 </div>
             </td>
             <td>
